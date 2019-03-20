@@ -4,6 +4,61 @@ author: ""
 date: "3/20/2019"
 output: html_document
 ---
+```{r}
+
+dialogue <- c("小明說：'明天不用上課。'",
+               "小花說：'真的嗎？'")
+
+cat(dialogue, sep="\n")
+```
+```{r}
+aLogical <- c(T,TRUE,F,FALSE,FALSE)
+class(aLogical)
+```
+
+```{r}
+# 加總向量內的所有元素值。
+sum(aLogical)
+```
+
+```{r}
+logical<-c(T,F)
+sum(logical)
+```
+
+```{r}
+studentMajors <- factor(c("經濟系", "經濟系", "法律系"))
+typeof(studentMajors)
+levels(studentMajors)
+as.integer(studentMajors)
+```
+
+```{r}
+birthplace<-factor(c("台北市","台北市","台中市","台中市"))
+levels(birthplace)
+as.integer(birthplace)
+class(birthplace)
+typeof(birthplace)
+
+```
+
+```{r}
+library(lubridate)
+dtObject<-ymd_hms("1970-01-01 00:02:53") 
+class(dtObject)
+dtObject
+```
+
+```{r}
+as.double(dtObject)
+```
+
+```{r}
+dtObjectVector<-ymd_hms(
+  c("1970-01-01 00:02:53",
+    "1980-02-11 11:25:22")
+)
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
