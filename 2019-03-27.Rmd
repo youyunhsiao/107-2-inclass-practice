@@ -66,6 +66,32 @@ c+aL
 class(aL+c)
 ```
 
+```{r}
+twDateTime <- ymd_hms("2019-03-18 14:04:00", tz="Asia/Taipei")
+twDateTime+1
+twDateTime+60
+```
+
+```{r}
+date2+1->date3
+as.integer(date3)->date
+class(date)
+```
+
+```{r}
+StartingDates<-ymd("2000-04-27")
+StartingDates+years(1)
+StartingDates+365
+StartingDates+dyears(1)
+```
+
+```{r}
+x=1
+y=26
+x==y
+x<y
+```
+
 ## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
