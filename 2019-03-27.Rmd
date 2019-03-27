@@ -2,6 +2,35 @@
 title: '20190327'
 output: html_document
 ---
+```{r}
+Sys.timezone()
+
+```
+
+```{r}
+library(lubridate)
+dtObject<-ymd_hms("1970-01-01 00:02:53") 
+dtObjectVector<-ymd_hms(
+  c("1970-01-01 00:02:53",
+    "1980-02-11 11:25:22")
+)
+```
+
+```{r}
+
+LisbonDateTime <- with_tz(twDateTime,tzone="Europe/Lisbon")
+```
+
+```{r}
+twDateTime <- ymd_hms("2019-03-18 14:04:00", tz="Asia/Taipei")
+```
+
+```{r}
+```
+
+```{r}
+as.integer(LisbonDateTime)
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
