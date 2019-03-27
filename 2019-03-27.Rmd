@@ -26,6 +26,10 @@ twDateTime <- ymd_hms("2019-03-18 14:04:00", tz="Asia/Taipei")
 ```
 
 ```{r}
+library(lubridate)
+date2<-mdy("March 3, 2019")
+date2
+as.double(date2)
 ```
 
 ```{r}
@@ -34,6 +38,32 @@ as.integer(LisbonDateTime)
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+a <- c(1, 5, -3)
+b <- c(0.5, 12, 2)
+```
+
+```{r}
+aL <- c(1L, 5L, -3L)
+bL <- c(-2L, -4L, 8L)
+```
+
+```{r}
+a+bL
+class(a+bL)
+aL+bL
+class(aL+bL)
+a*bL
+class(a*bL)
+```
+
+```{r}
+c<-4
+a+c
+c+aL
+class(aL+c)
 ```
 
 ## R Markdown
