@@ -25,10 +25,32 @@ class(currency)
 
 ```{r}
 currency<-as.factor(currency)
+class(currency)
 ```
 
 ```{r}
-levels(currency)
+levels(currency) #五種匯率
+```
+
+```{r}
+length(levels(currency))
+```
+
+```{r}
+head(currency)
+```
+
+```{r}
+currency2<-c("日元","美元","日元")
+currency2
+currency2=="日元"
+sum(currency2=="日元")
+```
+
+```{r}
+head(currency)
+currency=="日圓JPY/USD"
+sum(currency=="日圓JPY/USD")
 ```
 
 ```{r setup, include=FALSE}
