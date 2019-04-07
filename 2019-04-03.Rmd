@@ -53,6 +53,80 @@ currency=="日圓JPY/USD"
 sum(currency=="日圓JPY/USD")
 ```
 
+```{r}
+x1<-c("台北市","新北市","高雄市")
+greatTaipei<-c("台北市","新北市")
+x1 %in% greatTaipei
+!(x1 %in% greatTaipei)
+```
+
+```{r}
+y5<-c("女","男","女")
+y5=="女"
+sum(y5=="女")
+```
+```{r}
+x1 %in% greatTaipei
+y5=="女"
+(x1 %in% greatTaipei)&(y5=="女") #同時來自大台北又是女性
+```
+
+```{r}
+which((x1 %in% greatTaipei)&(y5=="女")) #第幾筆資料為True
+```
+
+```{r}
+x1 %in% greatTaipei
+y5=="女"
+(x1 %in% greatTaipei)|(y5=="女") #來自大台北 或 性別為女性
+```
+
+```{r}
+which((x1 %in% greatTaipei)|(y5=="女"))
+```
+
+```{r}
+x1 %in% greatTaipei
+y5=="女"
+xor(x1 %in% greatTaipei,y5=="女") #只滿足其中一個條件
+which(xor(x1 %in% greatTaipei,y5=="女"))
+```
+
+```{r}
+library(readr)
+exData2 <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/exData2.csv")
+date <- as.character(exData2$期間)
+currency <- exData2$幣別
+exchangeRate <- exData2$匯率
+```
+請把date的class存成date class
+```{r}
+class(date)
+head(date)
+```
+
+```{r}
+library(lubridate)
+date<-ymd(date)
+```
+
+```{r}
+class(date)
+```
+1980-08-01之後的資料有多少筆
+```{r}
+isAfter19800801<-
+  date>=ymd("1980-08-01")
+isAfter19800801
+```
+
+```{r}
+head(as.integer(date))
+as.integer(ymd("1980-08-01"))
+sum(date>=ymd("1980-08-01"))
+sum(isAfter19800801)
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
