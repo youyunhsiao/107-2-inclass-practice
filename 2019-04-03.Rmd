@@ -152,6 +152,38 @@ isEURO <- currency=="歐元USD/EUR"
 sum(isNotNa&isEURO)
 ```
 
+```{r}
+library(readr)
+transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
+courseType <- transcriptDataFinal$`必選修類別（必∕選∕通）`
+major <- transcriptDataFinal$學系
+studentID <- transcriptDataFinal$學號
+grade <- transcriptDataFinal$學期成績
+```
+有多少筆資料是來自經濟學系
+```{r}
+sum(major=="經濟學系")
+```
+請問學號“5bdS6977b”同學修了多少課
+```{r}
+sum(studentID=="5bdS6977b")
+
+```
+請問學號“5bdS6977b”有多少科成績及格
+```{r}
+sum(studentID=="5bdS6977b"&grade>=60)
+```
+有多少筆資料來自經濟學系學生且為選修課
+```{r}
+sum(major=="經濟學系"&courseType=="選")
+```
+在經濟學系學生且必修課程中，成經不及格佔多少比例
+```{r}
+Fail<-sum(major=="經濟學系"&courseType=="必"&grade<60)
+ECOstudent<-sum(major=="經濟學系"&courseType=="必")
+Fail/ECOstudent
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
