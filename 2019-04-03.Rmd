@@ -126,6 +126,31 @@ as.integer(ymd("1980-08-01"))
 sum(date>=ymd("1980-08-01"))
 sum(isAfter19800801)
 ```
+幣別為“歐元USD/EUR”的資料有多少筆
+```{r}
+head(currency)
+head(currency=="歐元USD/EUR")
+isEURO <- currency=="歐元USD/EUR"
+sum(isEURO)
+```
+
+```{r}
+currency<-as.factor(currency)
+class(currency)
+isEURO <- currency=="歐元USD/EUR"
+sum(isEURO)
+```
+exchangeRate有多少筆NA。
+```{r}
+isExchangeRateNa <- is.na(exchangeRate)
+sum(isExchangeRateNa)
+```
+排除NA後，幣別為“歐元USD/EUR”的資料有多少筆
+```{r}
+isNotNa <- !(is.na(exchangeRate))
+isEURO <- currency=="歐元USD/EUR"
+sum(isNotNa&isEURO)
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
