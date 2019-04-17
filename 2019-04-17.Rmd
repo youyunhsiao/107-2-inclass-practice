@@ -18,6 +18,11 @@ plasticContainer[[3]]
 ```
 
 ```{r}
+plasticContainer[c("greenBox","redBox")] 
+plasticContainer[c(1,2)]
+```
+
+```{r}
 成績單 <- c(
   個經=90,
   總經=77,
@@ -28,6 +33,25 @@ plasticContainer[[3]]
 ```{r}
 成績單
 成績單[[1]]
+```
+
+```{r}
+studentRecord <-
+  list(
+    學號="410073058",
+    姓名="王小明",
+    性別="男",
+    學年平均成績=list(
+      一年級=88,
+      二年級=90.3,
+      三年級=92,
+      四年級=95
+    )
+  )
+
+studentRecord
+studentRecord[[2]]
+studentRecord[[4]][[3]]
 ```
 
 ```{r}
