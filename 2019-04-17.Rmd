@@ -64,6 +64,21 @@ extract2 <- plasticContainer[[c("greenBox")]]
 extract2[[1]]
 ```
 
+```{r}
+length(plasticContainer)
+plasticContainer[c(T,F,T)]
+plasticContainer[c(T,F,F)]
+```
+
+```{r}
+plasticContainer$greenBox
+plasticContainer[["greenBox"]]
+```
+
+```{r}
+
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
