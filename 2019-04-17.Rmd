@@ -55,7 +55,13 @@ studentRecord[[4]][[3]]
 ```
 
 ```{r}
+extract1 <- plasticContainer[c("greenBox")]
+extract1[[1]][[1]]
+```
 
+```{r}
+extract2 <- plasticContainer[[c("greenBox")]]
+extract2[[1]]
 ```
 
 ```{r setup, include=FALSE}
