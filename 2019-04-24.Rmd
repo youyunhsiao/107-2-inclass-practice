@@ -73,6 +73,7 @@ classSurvey[c(1:60),c(4,5)]
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+classSurvey[[4]]
 ```
 
 ## R Markdown
