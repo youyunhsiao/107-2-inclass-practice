@@ -59,7 +59,17 @@ matObj1<-matrix(
   CHOOSELETTERS,5,3
 )
 matObj1
+tolower(matObj1)
+toupper(matObj1)
+matObj1[c(T,F,F,T,F),c(F,T,T)]
 ```
+
+```{r}
+library(readr)
+classSurvey <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/classSurvey.csv")
+classSurvey
+classSurvey[,c(F,F,F,T,T,F)]
+classSurvey[c(1:60),c(4,5)]
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
