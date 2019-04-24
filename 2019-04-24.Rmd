@@ -39,6 +39,26 @@ StuDF <- data.frame(
 StuDF 
 StuDF$姓名
 StuDF$成績
+
+```
+
+```{r}
+StuDF2 <- list(
+  學號=c(172,214,322,425,517),
+  姓名=c("小明","大雄","胖虎","小新","大白"),
+  成績=c(80,60,90,70,50)
+  )
+StuDF2[[2]][[3]]
+as.data.frame(StuDF2)
+```
+
+```{r}
+LETTERS
+CHOOSELETTERS<-LETTERS[1:15]
+matObj1<-matrix(
+  CHOOSELETTERS,5,3
+)
+matObj1
 ```
 
 ```{r setup, include=FALSE}
