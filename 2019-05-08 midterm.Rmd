@@ -1,0 +1,216 @@
+---
+title: "midterm"
+date: "2019-04-19"
+output: html_document
+params:
+  studentID: "你的學號"
+  studentName: "你的名字"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=F, message=F, warning = F)
+```
+
+# 注意事項
+
+存檔與填寫注意事項：
+
+假設你叫王小明，學號41078392。
+
+  1. 存檔時，請用你的學號當延伸檔名。學號為41078392，則請存成midterm-41078392.Rmd。(記得使用：save with enconding, 然後選utf-8)
+
+  2. 本文檔開始的Frontmatter中，studentID（即key）其value目前為"你的學號"，以上面學號為例則必需改成"41078392"；而studentName（key）其value目前為"你的名字"，以上面名字為例則必需改成"王小明"
+  
+> 前述存檔utf-8格式要求與frontmatter要求缺任何一個則扣1分。
+
+# 題目
+
+> 期中考不允許使用data frame的操作，`as.data.frame()`及`library(dplyr)`在改題時，電腦偵測到都會拿掉這些程式行，請注意。
+
+請先執以下code chunk, 引入所需packages. 
+```{r library}
+library(lubridate); library(stringr); library(dplyr); library(readr); library(purrr)
+```
+
+## 作答需知
+
+  * 每一題會有設好的ans chunk，它會有ansxx標籤（如下的ans99），請將你的程式寫在裡面。每一題都需要你把答案存在指定的物件，並在「**最後一行**」打物件名稱。以下例，若答案是`2+3`並要你存在答案物件test裡，那你的程式如下：
+```{r}
+test <- 2+3 # 答案存在指定test物件
+test # 最後一行打指定物件名稱
+```
+
+  * 同學可按上方有毛線球圖示的knit鍵，產生完整題目文件方便閱讀。
+  
+  * fronmatter裡的studentID及studentName任何一個沒填寫會扣作業分數1分。
+  
+## 1 字串與數字的比較
+執行以下程式隨機產生10個數字字串：
+```{r data1}
+x <- as.character(round(runif(10)*100),10)
+x
+```
+請產生一個logical class答案物件名為logicBig，其中元素值為TRUE若x對應值大於50（不包含50），反之為FALSE。答案物件請寫在最後一行。
+```{r ans1}
+# logicBig
+```
+
+
+## 2 list
+建立一個答案物件compoundObject, 其中`compoundObject[[1]]`會得到數字1 (numeric class), `compoundObject[[2]]`會得到字串"hello"(character class),`compoundObject[[3]]`會得到邏輯TRUE (logical class)。 
+```{r ans2}
+# compoundObject
+```
+
+
+## 3 UTC與時區
+執行以下程式得到以UTC時區輸入的日期時間字串（submitTime）
+```{r data3}
+load("submitTime.Rda")
+```
+請將它改成以America/New_York時區顯示的「character class」文字字串，並存在答案物件nyTime。答案物件請寫在最後一行。（注意答案物件class必修為character）
+```{r ans3}
+# nyTime
+```
+
+## 4 map
+有時我們會需要對list裡的每個元素取出相同位置的值，例如以下的a物件，其中對於「學號」「成績」元素的值，相同位置來自相同學生。如果我們想對每個元素取相同位置的值出來，我們可以用purrr套件裡的`map()`進行操作，方式為`map(a,~.ObjectExtraction)`
+```{r}
+a <- list(
+  學號=c("a23","a22","a41"),
+  成績=c(88,76,82)
+)
+map(a,~.[[2]]) # 取出每個元素第二位
+map(a,~.[c(1,3)]) # 取出每個元素第一及第三位
+map(a,~.[c(T,F,T)]) # 取出每個元素第一及第三位
+```
+
+請執行以下程式隨機產生一位學生在15門課的成績及學分數。
+```{r data4}
+randomGrades <- sample(40:80,15,replace = T)
+randomCredits <- sample(0:3,15,replace=T)
+data3 <- list(
+  成績=randomGrades,
+  學分數=randomCredits
+)
+```
+
+```{r}
+
+```
+
+請選出成績大於等於60的資料並存在passData這個帶有「成績」及「學分數」的list物件。此題答案物件為passData。
+```{r ans4}
+# passData
+```
+
+
+## 5
+執行以下程式產生台灣民國年月字串物件twDates。
+```{r data5}
+sample(99:103,15,replace = T)-> yy
+sample(1:12,replace=T)-> mm
+str_c("民國",str_pad(yy,3,"left","0"),"年",mm,"月") -> twDates
+# twDates
+```
+
+### 5.1 去除字元
+請將twDates中的"民國"及"月"都去除，並存在twDates2答案物件，如："民國099年2月"會變成"099年2"。
+```{r ans51}
+# twDates2
+str_replace_all(twDates,"(民國)|(月)","")->twDates2
+twDates2
+```
+
+### 5.2 取出年份
+取出民國年的並加上1911年轉成西元年，將此年份存在答案物件westYears裡（class為integer）。(hint: `str_split()`可分割字串,再使用第3題取出你要的部份)
+```{r ans52}
+# westYears
+as.integer(str_sub(twDates,3,5))+1911->westYears
+westYears
+```
+
+### 5.3 西元年月日
+將twDates民國年月轉成date class的西元年月日，原始資料沒有日，請設定成每月1日。例如："民國100年5月"會轉成2011-05-01的date class日期。答案請存westDates答案物件。
+
+```{r ans53}
+# westDates
+str_split(twDates2,"年")->DatesSplitList
+map(DatesSplitList,~.[[2]])->monthList
+unlist(monthList)->monthVecter
+str_c(as.character(westYears),monthVecter,"01",sep = "-")->westDates
+ymd(westDates)
+```
+
+
+## 6 differen time zone
+執行以下程式引入invoiceList物件，其中「訂單時區」與「訂單時間(以訂單時區顯示)」的每筆資料是訂單來自時區及以該時區輸入的下單時間字串，「UTC時間」則是個目前無特別意義的UTC時間。
+```{r data6}
+load("invoiceList.Rda")
+str(invoiceList)
+names(invoiceList) <-
+  c('訂單時區','訂單時間(以訂單時區顯示)','UTC時間')
+```
+
+### 6.1 改元素名稱
+請將元素名稱「訂單時間(以訂單時區顯示)」改成「訂單時區之下單時間」。答案最後一行請寫invoiceList答案物件。
+```{r ans61}
+# invoiceList
+```
+
+### 6.2 轉UTC
+請將每個「訂單時區之下單時間」依其「訂單時區」轉成UTC時間date time class（即POSIXct class）後，存在「UTC時間」對應的位置裡。最後一行請打本題答案物件invoiceList。
+
+```{r ans62}
+# invoiceList 
+```
+
+
+## 7 成績單 sampledTranscriptData
+
+請先執行以下程式取得學生成績單資料sampledTranscriptData，它是個list class的物件。
+```{r data7}
+load("sampledTranscriptData.Rda")
+names(sampledTranscriptData) <- 
+  c('學號','學期成績','學分數','學年','學期','必選修類別（必／選／通）','系級','科目名稱','年級','學屆')
+```
+sampledTranscriptData裡每個元素底下的值都是一位同學在一門課的修課狀況，資料變數（即這裡元素名稱）。
+
+### 7.1 子樣本與當人比例
+取出科目名稱為「科目204」的學期成績，計算該科的當人比例（子樣本中成績不及格的比例）將此值存在答案物件failRate裡（為numeric/double class）。
+```{r ans71}
+# failRate
+```
+
+
+### 7.2 產生學屆系碼 str_sub
+
+使用`sampledTranscriptData$學屆 <- `及`sampledTranscriptData$系碼 <-` 在sampledTranscriptData新增「學屆」及「系碼」兩個的新元素，其元素值放在`<-`右側定義。
+
+「學屆」元素值代表的是每一位同學的入學學年，可由學號的第2到4位字元產生，「系碼」即學號的第5到6位字元；如410073298即為100學年入學，系碼73。另本題的答案物件為sampledTranscriptData。（使用`sampledTranscriptData$學屆 <- `及`sampledTranscriptData$系碼 <-`，將個別由學號取出之值放在`<-`右側即可在sampleTranscriptData新增這兩個元素。）
+```{r ans72}
+# sampledTranscriptData
+```
+
+### 7.3 產生學系 str_replace_all
+請在sampledTranscriptData新增一個「學系」變數，存在`sampledTranscriptData$學系`答案物件裡，它是「系級」元素值去除數字1,2,3,4的結果。例如：系級為"經濟學系2", 學系值即為"經濟學系"。（hint: 可透過`str_replace()`或`str_replace_all()`把字串中的數字去除。）
+
+```{r ans73}
+# sampledTranscriptData$學系 
+```
+
+### 7.4 轉系生
+學號是一入學就決定，不管後來有沒有轉系。 請找出外系轉入經濟系的學生學號，並存成changeMajorStudent答案物件。(由於資料一筆為一科成績，所以學號會重覆出現，要存入答案物件前請用`unique()`去除重覆學號)
+```{r ans74}
+# changeMajorStudent
+```
+
+### 7.5 學期平均成績
+請計算學號"410073409b"在101學年第1學期的平均成績（即該學期每科成績乘每科學分後加總，再除以總學分數），答案存在答案物件studentGPA(為numeric class)。
+```{r ans75}
+# studentGPA
+```
+
+> 答完後，請確認每個code chunk的最後一行皆為該題的答案物件（除非題目有另外規定），且frontmatter的studentID及studentName皆有填寫。
+
+> 注意： 沒有存檔成utf-8格式或frontmatter資訊沒填寫會扣1分。
