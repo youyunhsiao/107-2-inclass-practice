@@ -112,6 +112,29 @@ return(Qd)}
 supply_fun(8,3,2)
 ```
 
+```{r}
+library(readr)
+transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
+```
+
+```{r}
+studentID <-"92aS67fee" 
+transcriptDataFinal$學號==studentID -> logiChosenStudent
+sum(transcriptDataFinal$學期成績[logiChosenStudent]*
+  transcriptDataFinal$學分數[logiChosenStudent])/
+  sum(transcriptDataFinal$學分數[logiChosenStudent]) -> GPA
+```
+
+```{r}
+gpa_fun <- function(studentID){
+  transcriptDataFinal$學號==studentID -> logiChosenStudent
+  sum(transcriptDataFinal$學期成績[logiChosenStudent]*
+    transcriptDataFinal$學分數[logiChosenStudent])/
+    sum(transcriptDataFinal$學分數[logiChosenStudent]) -> GPA
+  return(GPA)
+}
+```
+
 ## R Markdown
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
