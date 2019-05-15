@@ -48,8 +48,68 @@ b$新元素<-"student"
 b
 ```
 
+```{r}
+library(readr)
+library(lubridate)
+exData3 <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/exData3.csv",
+                    col_types = cols(
+                      匯率 = col_number(),
+                      期間 = col_character()))
+exData3
+```
+
+```{r}
+exData3[["期間"]]<-ymd(exData3[["期間"]])
+exData3$期間<-exData3[["期間"]]
+exData3
+class(exData3$期間)
+```
+
+```{r}
+isAsiaCrisis<-(exData3$期間>=ymd("1997-06-01"))&(exData3$期間<=ymd("1998-12-01"))
+logiAsiaCrisis <- exData3$isAsiaCrisis
+exData3[logiAsiaCrisis, ]
+exData3[exData3$isAsiaCrisis==T ,]
+```
+
+```{r}
+StuDF <- data.frame(
+  學號=c(172,214,322,425,517),
+  姓名=c("小明","大雄","胖虎","小新","大白"),
+  成績=c(80,60,90,70,50)
+  )
+```
+
+```{r}
+score<-as.integer(StuDF$成績)-5
+x<-StuDF$及格<-score>=60
+x
+StuDF[x,]
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+utility_cobb_douglass <- function(x,y,.alpha,.beta){
+  utilValue <- x^.alpha*y^.beta # 程序產生output值
+  return(utilValue) # 傳回output值
+}
+```
+
+```{r}
+a<-function(x,.alpha){value<-x+.alpha
+return(value)}
+a(1,2)
+```
+
+```{r}
+supply_fun<-function(a,b,P){Qs<-a+b*P
+return(Qs)}
+demand_fun<-function(c,d,P){Qd<-c-d*P
+return(Qd)}
+supply_fun(8,3,2)
 ```
 
 ## R Markdown
