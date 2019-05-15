@@ -27,6 +27,27 @@ colnames(StuDF)[c(1,2,3)]<-c("StudentID", "Name", "Grade")
 StuDF
 ```
 
+```{r}
+b <- list(
+  元素1=1,
+  元素2="Hello",
+  元素3=TRUE
+)
+b
+```
+
+```{r}
+b[[3]]<-FALSE
+b[[5]]<-7
+b
+```
+
+```{r}
+b$元素3<-TRUE
+b$新元素<-"student"
+b
+```
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
