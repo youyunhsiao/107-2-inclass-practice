@@ -102,6 +102,21 @@ fizzbuzz<-function(x){
 fizzbuzz(5)
 ```
 
+```{r}
+fizzbuzz <- function(number){
+  if(number %% 15== 0){
+    return("fizzbuzz")}
+    else if(number%% 3 ==0){
+      return("fizz")
+    }else if (number%% 5 == 0){
+      return("buzz")
+    }else {
+      return(number)
+    }
+}
+fizzbuzz(15)
+```
+
 
 創造一個demand_supply_fun(P,a,b,c,d)，它會輸出一個list包含三個元素：供給量，需求量，超額供給量
 demand_supply_fun<-function(P,a,b,c,d){
