@@ -3,77 +3,138 @@ title: "Untitled"
 output: html_document
 ---
 ```{r}
+textbookURL <- function(){
+browseURL("https://bookdown.org/tpemartin/ntpu-programming-for-data-science/function-and-conditional-execution.html#returninput")}
+textbookURL()
+```
+```{r}
+
+```
+
+```{r}
 library(readr)
 transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
 ```
 
+
 ```{r}
 gpa_fun <- function(studentID){
-  transcriptDataFinal$學�??==studentID -> logiChosenStudent
+  transcriptDataFinal$學號==studentID -> logiChosenStudent
   
   subSample <- transcriptDataFinal[logiChosenStudent,]
   
-  sum(subSample$學�?��?�績*subSample$學�?�數)/
-    sum(subSample$學�?�數) -> GPA
+  sum(subSample$學期成績*subSample$學分數)/
+    sum(subSample$學分數) -> GPA
   return(GPA)
 }
-transcriptDataFinal
 ```
 
 ```{r}
-gpa_fun("92aS67fee")
-```
-
-```{r}
-library(stringr)
-sample(99:103,15,replace = T)-> yy
-sample(1:12,15,replace=T)-> mm
-str_c("民�??",str_pad(yy,3,"left","0"),"�?",mm,"???") -> twDates
-```
-
-```{r}
-library(stringr); library(lubridate)
-
-
-
-twDates
-date_convert_twYM<-function(twDates){
-  yyyy<-as.integer(str_extract(twDates,"(?<=(民�??))[:digit:]+"))+1911
-  mm<-str_extract(twDates,"[:digit:]+(?=???)")
-  yyyymmdd <- ymd(str_c(yyyy,mm,"01",sep="-"))
-  return(yyyymmdd)
-}
-date_convert_twYM("民�??100�?5???")
-```
-
-```{r}
-date_convert_twYM<-function(twDates,dd="01"){
-  yyyy<-as.integer(str_extract(twDates,"(?<=(民�??))[:digit:]+"))+1911
-  mm<-str_extract(twDates,"[:digit:]+(?=???)")
-  yyyymmdd <- ymd(str_c(yyyy,mm,"01",sep="-"))
-  y<-ymd(yyyymmdd)
-  return(y)
-}
-date_convert_twYM(twDates)
-date_convert_twYM("民�??100�?5???")
-```
-
-```{r}
-utility_cobb_douglass2 <- function(x,y,.alpha=0.5,.beta=0.5){
-  utilValue <- x^.alpha*y^.beta
-  return(utilValue)
+gpa_fun2 <- function(studentID){
+  transcriptDataFinal$學號==studentID -> logiChosenStudent
+  
+  subSample <- transcriptDataFinal[logiChosenStudent,]
+  
+  sum(subSample$學期成績*subSample$學分數)/
+    sum(subSample$學分數) -> GPA
+  return(
+    list(
+      平均成績=GPA,
+      成績單=subSample
+      )
+  )
 }
 ```
+```{r}
+gpa_fun <- function(studentID){
+  transcriptDataFinal$學號==studentID -> logiChosenStudent
+
+  subSample <- transcriptDataFinal[logiChosenStudent,]
+
+  sum(subSample$學期成績*subSample$學分數)/
+    sum(subSample$學分數) -> GPA
+  if(studentID %in% transcriptDataFinal$學號){
+  return(GPA)
+  }else{
+      message("查無此學號")
+    }
+}
+
+gpa_fun("92aS67fee") # 顯示82.85276
+gpa_fun("aa829838s") # 查無此學號
+```
 
 ```{r}
-utility_cobb_douglass2(1,2) # 使用??�設?�?
-utility_cobb_douglass2(1,2,0.5,0.8) # ?��定�?�數?�?
+gpa_fun <- function(studentID){
+  if(studentID %in% transcriptDataFinal$學號){
+  transcriptDataFinal$學號==studentID -> logiChosenStudent
+  subSample <- transcriptDataFinal[logiChosenStudent,]
+  sum(subSample$學期成績*subSample$學分數)/
+    sum(subSample$學分數) -> GPA
+  return(GPA)
+  }
+  else
+    {
+      message("查無此學號")
+    }
+}
+
+gpa_fun("92aS67fee") # 顯示82.85276
+gpa_fun("aa829838s") # 查無此學號
+
 ```
 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+創造一個demand_supply_fun(P,a,b,c,d)，它會輸出一個list包含三個元素：供給量，需求量，超額供給量
+demand_supply_fun<-function(P,a,b,c,d){
+  Qs<-a+b*P
+  Qd<-c-d*P
+  return(
+    list(Qs=Qs,Qd=Qd,超額供給量=Qs-Qd)
+  )
+}
+
+```{r}
+function(P,a,b,c,d){
+  Qs<-a+b*P
+  Qd<-c-d*P
+  return(
+    list(Qs=Qs,Qd=Qd,超額供給量=Qs-Qd)
+  )
+}
 ```
+
+```{r}
+supply_fun3 <- function(P,a,b){
+  Qs <- a+b*P
+  if(P < 0) {
+    message("P不能為負值") # 在螢幕出現的「錯誤」提示，沒有輸出任何值
+  } else {
+    return(Qs)
+  }
+}
+supply_fun3(P=-1,0,1)
+supply_fun3(P=2,0,1)
+```
+
+```{r}
+gpa_fun("92aS67fee") # 顯示82.85276
+gpa_fun("aa829838s") # 查無此學號
+```
+
+```{r}
+gpa_fun2("92aS67fee") -> outputValue
+outputValue$平均成績
+outputValue$成績單
+```
+
+```{r}
+
+```
+
+
+
+
 
 ## R Markdown
 
