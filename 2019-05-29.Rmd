@@ -56,7 +56,7 @@ gpa_fun <- function(studentID){
   if(studentID %in% transcriptDataFinal$學號){
   return(GPA)
   }else{
-      message("查無此學號")
+      message("No such ID")
     }
 }
 
@@ -75,13 +75,31 @@ gpa_fun <- function(studentID){
   }
   else
     {
-      message("查無此學號")
+      message("NO such ID")
     }
 }
 
 gpa_fun("92aS67fee") # 顯示82.85276
 gpa_fun("aa829838s") # 查無此學號
 
+```
+
+```{r}
+fizzbuzz<-function(x){
+  if(x%%3==0&x%%5!=0){
+    print("fizz")
+  }
+  else if(x%%5==0&x%%3!=0){
+    print("buzz")
+  }
+  else if(x%%5==0&x%%3==0){
+    print("fizzbuzz")
+  }
+  else{
+    print(x)
+  }
+}
+fizzbuzz(5)
 ```
 
 
