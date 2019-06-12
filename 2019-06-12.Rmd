@@ -1,0 +1,148 @@
+---
+title: "Untitled"
+output: html_document
+---
+```{r}
+gmailAddress <- c(
+  "tim@gmail.com",
+  "anita",
+  "yellen@gmail.com",
+  "huang@gmail.com"
+)
+```
+
+```{r}
+i<-1
+gmailAddress[[i]]
+```
+
+```{r}
+library(stringr)
+for (i in seg_along(gmailAddress)) {
+  if(str_detect(gmailAddress[i],“@gmail.com”)){
+    print(gmailAddress[i])
+  }else(
+    print(str_c(gmailAddress[i],))
+  )
+}
+```
+
+```{r}
+library(stringr)
+for (i in seq_along(gmailAddress)) {
+  if(!str_detect(gmailAddress[[i]],"gmail.com")){
+    correct<-str_c(gmailAddress[[i]],"gmail.com")
+    gmailAddress<-correct
+  }
+}
+```
+
+```{r}
+
+```
+
+```{r}
+for(i in seq_along(gmailAddress)){
+  if(!str_detect(gmailAddress[[i]],"@gmail.com")){
+    correctGmailAddress <-
+      str_c(gmailAddress[[i]],"@gmail.com")
+    gmailAddress[[i]] <- correctGmailAddress
+  }
+}
+```
+
+```{r}
+load(url("https://www.dropbox.com/s/qnz9paigf61yjus/commitHistory.Rda?raw=1"))
+for (i in seq_along(commitHistory)) {
+  print(commitHistory[[i]][["commit"]][["committer"]][["name"]])
+}
+for (i in seq_along(commitHistory)) {
+  print(commitHistory[[i]][["commit"]][["author"]][["name"]])
+}
+for (i in seq_along(commitHistory)) {
+  print(commitHistory[[i]][["commit"]][["committer"]][["date"]])
+}
+```
+
+```{r}
+for (i in seq_along(commitHistory)) {
+  commitHistory[[i]][["commit"]][["committer"]][["name"]]==commitHistory[[i]][["commit"]][["author"]][["name"]]->logresult
+  print(logresult)
+}
+```
+
+mission 1
+```{r}
+i<-1
+saveAuthor<-vector("character",length(commitHistory))
+for (i in seq_along(commitHistory)) {
+  commitHistory[[i]][["commit"]][["committer"]][["name"]]->saveAuthor[[i]]
+}
+saveAuthor
+```
+```{r}
+#mission 2
+i<-1
+saveCommitter<-vector("character",length(commitHistory))
+for (i in seq_along(commitHistory)) {
+  commitHistory[[i]][["commit"]][["author"]][["name"]]->saveCommitter[[i]]
+}
+saveCommitter
+```
+```{r}
+saveEveryThing <- vector("list",length(commitHistory))
+saveSameLogi <- vector("logical",length(commitHistory))
+
+
+for(i in seq_along(commitHistory)){
+  author_i <- commitHistory[[i]]$commit$author$name
+  committer_i <- commitHistory[[i]]$commit$committer$name
+  commitDate_i <- commitHistory[[i]]$commit$committer$date
+
+  (author_i == committer_i) -> saveSameLogi[[i]]
+
+  list(
+    author=author_i,
+    committer=committer_i,
+    commitDate=commitDate_i
+  ) -> saveEveryThing[[i]]  
+}
+
+saveEveryThing
+
+print(saveSameLogi)
+
+saveEveryThing[saveSameLogi] -> saveValidCommitDate
+
+saveValidCommitDate
+```
+
+```{r}
+#mission 3
+i<-1
+saveTime<-
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
